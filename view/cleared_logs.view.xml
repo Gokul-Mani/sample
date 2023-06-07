@@ -1,0 +1,204 @@
+<mvc:View controllerName="autocleaning.cashapplication.controller.cleared_logs" xmlns="sap.ui.table"
+        xmlns:mvc="sap.ui.core.mvc"
+        xmlns:m="sap.m"
+        xmlns:u="sap.ui.unified"
+          xmlns:fb="sap.ui.comp.filterbar"
+        xmlns:core="sap.ui.core"
+        xmlns:f="sap.f"
+        xmlns:vm="sap.ui.comp.variants"
+        height="100%">
+    <f:DynamicPage id="dynamicPageId" headerExpanded="{/headerExpanded}" preserveHeaderStateOnScroll="true">
+        
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <vm:VariantManagement standardItemText="Cleared Logs" />
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+            <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <f:content>
+                    <fb:FilterBar id="filterbar" reset="onReset" search="onSearch" useToolbar="true" showGoOnFB="true">
+                        <fb:filterItems>
+                            <fb:FilterItem name="E" label="Company Code">
+                                <fb:control>
+                                  <m:ComboBox  id="companycodeget"
+					
+						 items="{ path: 'oModelcompanyCode>/' }">
+                                        <core:Item text="{oModelcompanyCode>Bukrs}" key="{oModelcompanyCode>Bukrs}" />
+				</m:ComboBox>
+                                </fb:control>
+                                 
+                            </fb:FilterItem>
+
+                            <fb:FilterItem name="Ee" label="Customer">
+                                <fb:control>
+                                   <m:ComboBox  id="customerid"
+					
+						 items="{ path: 'oModelgetcustomer>/' }">
+                                        <core:Item text="{oModelgetcustomer>Kunnr}" key="{oModelgetcustomer>Kunnr}" />
+				</m:ComboBox>
+                                
+                                </fb:control>
+                            </fb:FilterItem>
+
+                            <fb:FilterItem name="Cc" label="GL Account">
+                                <fb:control>
+                             <m:ComboBox  id="glaccount"
+					
+						 items="{ path: 'oModelgetgl_account>/' }">
+                                        <core:Item text="{oModelgetgl_account>Saknr}" key="{oModelgetgl_account>Saknr}" />
+				</m:ComboBox>
+                                </fb:control>
+                            </fb:FilterItem>
+            
+                        </fb:filterItems>
+                    </fb:FilterBar>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+       <f:content>
+       
+            <TreeTable
+                    id="TreeTableBasic"
+                     visibleRowCountMode="Interactive"
+	    selectionMode="MultiToggle"
+         
+        enableSelectAll="false"
+	    toggleOpenState="onTreeViewToggleOpenState"
+	    collapseRecursive="false"
+        useGroupMode="false"
+	   
+                    
+                    rows="{path: 'oModelgetclearedtree>/data', parameters: {'arrayNames':['OPEN_INVOICE', 'BANK_DETAILS']}}"
+                    ariaLabelledBy="title" >
+                <extension>
+                    <m:OverflowToolbar style="Clear">
+                        <m:Title id="title" text="Cleared Logs"/>
+                         <m:ToolbarSpacer/>
+                         <m:ToolbarSpacer/>
+                       <m:Title id="idset"  level="H2"></m:Title>
+                        
+                        <m:ToolbarSpacer/>
+						<m:ToolbarSpacer/>
+						<m:Button text="" tooltip="Collapse all" press="onCollapseAll" icon="sap-icon://collapse-all"/>
+						<m:Button text="" tooltip="Expand first level" press="onExpandFirstLevel" icon="sap-icon://expand-all"/>
+                       
+                    
+                    </m:OverflowToolbar>
+                </extension>
+                 
+                <columns>
+                    <Column width="6%" hAlign="Center">
+                        <m:Label text="Acc Doc No"/>
+                        <template>
+                            <m:Text text="{oModelgetclearedtree>Belnr}" wrapping="false" />
+                        </template>
+                    </Column>
+                    
+
+                    <Column width="8%" hAlign="Center">
+                        <m:Label text="Payment Notes"/>
+                        <template>
+                            <m:Text text="{oModelgetclearedtree>Vwezw}" />
+                        </template>
+                    </Column>
+                     
+                    
+
+                     <Column width="4%" hAlign="Center">
+                        <m:Label text="Comp code"/>
+                        <template>
+                            <m:Text text="{oModelgetclearedtree>Bukrs}" />
+                        </template>
+                    </Column>
+
+                     <Column width="3%" hAlign="Center">
+                        <m:Label text="Year"/>
+                        <template>
+                            <m:Text text="{oModelgetclearedtree>Gjahr}" />
+                        </template>
+                    </Column>
+
+                     <Column width="4%" hAlign="Center">
+                        <m:Label text="Customer"/>
+                        <template>
+                            <m:Text text="{oModelgetclearedtree>Kunnr}" />
+                        </template>
+                    </Column>
+
+                     <Column width="5%" hAlign="Center">
+                        <m:Label text="GL Account"/>
+                        <template>
+                            <m:Text text="{oModelgetclearedtree>Saknr}" />
+                        </template>
+                    </Column>
+
+                     <Column width="6%" hAlign="Center">
+                        <m:Label text="Posting Date"/>
+                        <template>
+                            <m:Text text="{oModelgetclearedtree>HBudat}" />
+                        </template>
+                    </Column >
+
+                     
+                     <Column width="6%" hAlign="Center">
+                        <m:Label text="Doc Date"/>
+                        <template>
+                            <m:Text text="{oModelgetclearedtree>HBldat}" />
+                        </template>
+                    </Column>
+                      <Column width="6%" hAlign="Center">
+                        <m:Label text="Assignment number"/>
+                        <template>
+                            <m:Text text="{oModelgetclearedtree>Zuonr}" />
+                        </template>
+                    </Column>
+                   
+                     <Column width="6%" hAlign="Center">
+                        <m:Label text="Total"/>
+                        <template>
+                            <m:Text text="{oModelgetclearedtree>Wrbtr}"/>
+                        </template>
+                    </Column>
+                     
+
+                    <Column width="4%" hAlign="Center">
+                        <m:Label text="Curr Key"/>
+                        <template>
+                            <m:Text text="{oModelgetclearedtree>Waers}" />
+                        </template>
+                    </Column>
+
+
+
+                    
+                     <Column width="4%" hAlign="Center">
+                        <m:Label text="Copied Record Number"/>
+                        <template>
+                            <m:Text text="{oModelgetclearedtree>Rsnum}" />
+                        </template>
+                    </Column>
+
+                      
+                     <Column width="5%" hAlign="Center">
+                        <m:Label text="Short Key"/>
+                        <template>
+                            <m:Text text="{oModelgetclearedtree>Kukey}" />
+                        </template>
+                    </Column>
+
+                     <Column width="5%" hAlign="Center">
+                        <m:Label text="Memo Record Number"/>
+                        <template>
+                            <m:Text text="{oModelgetclearedtree>Esnum}" />
+                        </template>
+                    </Column>
+                    
+                </columns>
+            </TreeTable>
+        </f:content>
+
+    </f:DynamicPage>
+</mvc:View>

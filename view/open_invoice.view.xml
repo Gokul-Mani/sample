@@ -1,0 +1,294 @@
+<mvc:View
+    controllerName="autocleaning.cashapplication.controller.open_invoice"
+    xmlns:sap.ui.fl="sap.ui.fl"
+    xmlns:smartfilterbar="sap.ui.comp.smartfilterbar"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    height="100%"
+    xmlns:l="sap.ui.layout"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns:layout="sap.ui.layout"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:vm="sap.ui.comp.variants"
+>
+    <f:DynamicPage id="dynamicPageId" headerExpanded="{/headerExpanded}">
+        <!-- DynamicPage Title -->
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <vm:VariantManagement standardItemText=" Open Invoice Items" />
+                </f:heading>
+                <f:actions />
+            </f:DynamicPageTitle>
+        </f:title>
+        <!-- DynamicPage Header -->
+
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <f:content>
+                    <fb:FilterBar id="filterbar" reset="onReset"   search=".onSearch" useToolbar="true" showGoOnFB="true">
+                        <fb:filterItems>
+                         
+                            <fb:FilterItem name="CC" label="Chart of Account">
+                                <fb:control>
+                                    <MultiComboBox id="multiComboBox" showSecondaryValues="true" items="{ path: 'oModelgetcharAC>/' }">
+                                        <core:ListItem key="{oModelgetcharAC>Ktopl}" additionalText="{oModelgetcharAC>Ktplt}" text="{oModelgetcharAC>Ktopl}" />
+                                    </MultiComboBox>
+                                </fb:control>
+                            </fb:FilterItem>
+
+                            <fb:FilterItem name="F" label="Fiscal Year">
+                                <fb:control>
+                                    <DatePicker displayFormat="yyyy"   placeholder=" "  />
+                                </fb:control>
+                                
+                            </fb:FilterItem>
+                                
+                            <fb:FilterItem name="E" label="Company Code">
+                                <fb:control>
+                                   
+                                	<ComboBox  id="companycodeget"
+					
+						 items="{ path: 'oModelcompanyCode>/' }">
+                                        <core:Item text="{oModelcompanyCode>Bukrs}" key="{oModelcompanyCode>Bukrs}" />
+				</ComboBox>
+                                </fb:control>
+                            </fb:FilterItem>
+
+                            <fb:FilterItem name="Ee" label="Customers">
+                                <fb:control>
+                                    
+                                    <ComboBox  id="customerid"
+					
+						 items="{ path: 'oModelgetcustomer>/' }">
+                                        <core:Item text="{oModelgetcustomer>Kunnr}" key="{oModelgetcustomer>Kunnr}" />
+				</ComboBox>
+                                </fb:control>
+                            </fb:FilterItem>
+
+                            <fb:FilterItem name="Cc" label="to">
+                                <fb:control>
+                                    
+                                     <ComboBox  id="customerto"
+					
+						 items="{ path: 'oModelgetcustomer>/' }">
+                                        <core:Item text="{oModelgetcustomer>Kunnr}" key="{oModelgetcustomer>Kunnr}" />
+				</ComboBox>
+                                </fb:control>
+                            </fb:FilterItem>
+                            
+                            
+                            <fb:FilterItem name="Gg"  label="GL Account">
+                                <fb:control>
+                                <ComboBox  id="glaccount"
+					
+						 items="{ path: 'oModelgetgl_account>/' }">
+                                        <core:Item text="{oModelgetgl_account>Saknr}" key="{oModelgetgl_account>Saknr}" />
+				</ComboBox>
+                                   
+                                </fb:control>
+                            </fb:FilterItem>
+                            <fb:FilterItem name="Customersto" label="to" >
+                                <fb:control>
+                                     
+                                     <ComboBox  id="glto"
+					
+						 items="{ path: 'oModelgetgl_account>/' }">
+                                        <core:Item text="{oModelgetgl_account>Saknr}" key="{oModelgetgl_account>Saknr}" />
+				</ComboBox>
+                                </fb:control>
+                            </fb:FilterItem>
+                            
+                            <fb:FilterItem name="documentdate" label="Document Date">
+                                <fb:control>
+                                    <DateRangeSelection displayFormat="dd-MM-yyyy" dateValueFormat="yyyy-MM-dd" placeholder="Select a date range" />
+                                </fb:control>
+                            </fb:FilterItem>
+
+                            
+
+                            <fb:FilterItem name="C" label="Posting Date">
+                                <fb:control>
+                                    <DateRangeSelection displayFormat="dd-MM-yyyy" dateValueFormat="yyyy-MM-dd" placeholder="Select a date range" />
+                                </fb:control>
+                            </fb:FilterItem>
+
+                           
+                            <fb:FilterItem name="Type" label="Type">
+                                <fb:control>
+                                    <VBox>
+                                        <CheckBox text="Normal Items" selected="true" />
+                                        <ToolbarSpacer />
+                                        <CheckBox text="Special G/L transactions" selected="true" />
+                                    </VBox>
+                                </fb:control>
+                            </fb:FilterItem>
+                        </fb:filterItems>
+                    </fb:FilterBar>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+
+        <f:content>
+        <ScrollContainer id="ScrollContainer" height='55rem'   width="100%" vertical='true' horizontal="true" >
+            <Table id="persoTable" sticky="ColumnHeaders,HeaderToolbar"   items="{ path: 'oModelOpenItem>/' }" sap.ui.fl:flexibility="sap/m/flexibility/EngineFlex" width="100%">
+                <headerToolbar>
+                    <Toolbar>
+                        <content>
+                          <Title text="Open Invoice Items" level="H2" />
+                          <ToolbarSpacer />
+                            <Title id="idset"  level="H2"></Title>
+                            <ToolbarSpacer />
+                             <!-- <Button text="Match" type="Accept" press="OpenMatchList" /> -->
+                            <Button icon="sap-icon://action-settings"  />
+                        </content>
+                    </Toolbar>
+                </headerToolbar>
+
+                <columns >
+                    <Column visible="true"  id="companycode"  hAlign="Left">
+                        <header  >
+                            <Text text="Comp Code"  />
+                        </header>
+                    </Column>
+                    <Column id="Fiscalyear" hAlign="Center">
+                        <header>
+                            <Text text=" Year" />
+                        </header>
+                    </Column>
+                     <Column id="customer" hAlign="Left">
+                        <header>
+                            <Text text="Customer" />
+                        </header>
+                    </Column>
+                    <Column id="glAccount" hAlign="Left">
+                        <header>
+                            <Text text="GL Account" />
+                        </header>
+                    </Column>
+                    <Column id="postingdate" hAlign="Center" >
+                        <header>
+                            <Text text="Posting Date" />
+                        </header>
+                    </Column>
+                    <Column id="documentdate" hAlign="Center" >
+                        <header>
+                            <Text text="Doc Date" />
+                        </header>
+                    </Column>
+                    <Column id="AccoDoNumber" hAlign="Left" visible="true">
+                        <header>
+                            <Text text="Acc Doc No" />
+                        </header>
+                    </Column>
+                     <Column id="Nolineitems" hAlign="Center" visible="true">
+                        <header>
+                            <Text text="No of Line Item" />
+                        </header>
+                    </Column>
+                    <Column id="RefDocNumber" hAlign="Center" visible="true">
+                        <header>
+                            <Text text="Ref Doc No" />
+                        </header>
+                    </Column>
+                    <Column id="ProfitCenter" hAlign="Center" visible="true">
+                        <header>
+                            <Text text="Profit Center" />
+                        </header>
+                    </Column>
+                    <Column id="ItemText" hAlign="Center" visible="true">
+                        <header>
+                            <Text text="Item Text" />
+                        </header>
+                    </Column>
+                    <Column id="Assignnumber" hAlign="Center" visible="true">
+                        <header>
+                            <Text text="Assignment " />
+                        </header>
+                    </Column>
+                    <Column id="BusPartnerKey1" hAlign="Center" visible="true">
+                        <header>
+                            <Text text="BP Ref Key 1" />
+                        </header>
+                    </Column>
+                    <Column id="BusPartnerKey2" hAlign="Center" visible="true">
+                        <header>
+                            <Text text="BP Ref Key 2" />
+                        </header>
+                    </Column>
+                     <Column id="specialglIndicator" hAlign="Center" visible="true">
+                        <header>
+                            <Text text="Spl GL Indicator" />
+                        </header>
+                    </Column>
+                     <Column id="RefkeylineItems" hAlign="Center" visible="true">
+                        <header>
+                            <Text text="Ref Key for Line Item" />
+                        </header>
+                    </Column>
+                     <Column id="Amountlocalcurrency" hAlign="Right" visible="true">
+                        <header>
+                            <Text text="Amount" />
+                        </header>
+                    </Column>
+                    <Column id="AmountGeneralLedge" hAlign="Right" visible="true">
+                        <header>
+                            <Text text="Curr" />
+                        </header>
+                    </Column>
+                    <!-- <Column id="Amountdocumentcurrency" hAlign="Left" visible="true">
+                        <header>
+                            <Text text="Amount in Doc Curr" />
+                        </header>
+                    </Column>
+                    <Column id="currencyKey" hAlign="Left" visible="true">
+                        <header>
+                            <Text text="Curr Key" />
+                        </header>
+                    </Column> -->
+                </columns>
+
+                <items>
+                    <ColumnListItem>
+                       <cells>
+                        <Text text="{oModelOpenItem>Bukrs}" />
+                        <Text text="{oModelOpenItem>Gjahr}" />
+                        <Text text="{oModelOpenItem>Kunnr}" />
+                        <Text text="{oModelOpenItem>Saknr}" />
+                         <Text text="{oModelOpenItem>HBudatFormat}" />
+                        <Text text="{oModelOpenItem>HBldatFormat}" />
+                        <Text text="{oModelOpenItem>Belnr}" />
+                        <Text text="{oModelOpenItem>Buzei}" />
+                         <Text text="{oModelOpenItem>Xblnr}" />
+                         <Text text="{oModelOpenItem>Prctr}" />
+                        <Text text="{oModelOpenItem>Sgtxt}" />
+                        <Text text="{oModelOpenItem>Zuonr}" />
+                         <Text text="{oModelOpenItem>Xref1}" />
+                        <Text text="{oModelOpenItem>Xref2}" />
+                        <Text text="{oModelOpenItem>Umskz}" />
+                        <Text text="{oModelOpenItem>Xref3}" />
+
+                         <Text text="{oModelOpenItem>Dmbtr}" />
+                        <Text text="{oModelOpenItem>Pswsl}" />
+                        <!-- <Text text="{oModelOpenItem>Wrbtr}" />
+                        <Text text="{oModelOpenItem>Waers}" /> -->
+                        </cells>
+                    </ColumnListItem>
+                    
+                    
+                </items>
+            </Table>
+            </ScrollContainer>
+        </f:content>
+        <!-- DynamicPage Footer -->
+        <f:footer>
+            <OverflowToolbar>
+                <ToolbarSpacer />
+                <Button type="Accept" text="Accept" />
+                <Button type="Reject" text="Reject" />
+            </OverflowToolbar>
+        </f:footer>
+    </f:DynamicPage>
+</mvc:View>

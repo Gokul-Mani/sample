@@ -1,0 +1,169 @@
+{
+    "_version": "1.49.0",
+    "sap.app": {
+        "id": "autocleaning.cashapplication",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "@sap/generator-fiori:basic",
+            "version": "1.9.0",
+            "toolsId": "f96f6472-b836-4afe-904f-cf8594ef3a0a"
+        },
+        "crossNavigation": {
+            "inbounds": {
+                "autocleaning-cashapplication-inbound": {
+                    "signature": {
+                        "parameters": {},
+                        "additionalParameters": "allowed"
+                    },
+                    "semanticObject": "CashApplication",
+                    "action": "Display",
+                    "title": "{{flpTitle}}",
+                    "subTitle": "{{flpSubtitle}}",
+                    "icon": ""
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": true,
+        "dependencies": {
+            "minUI5Version": "1.111.0",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {},
+                "sap.f": {},
+                "sap.suite.ui.generic.template": {},
+                "sap.ui.comp": {},
+                "sap.ui.generic.app": {},
+                "sap.ui.table": {},
+                "sap.ushell": {},
+                "sap.ui.layout": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "autocleaning.cashapplication.i18n.i18n"
+                }
+            }
+        },
+        "resources": {
+            "css": [
+                {
+                    "uri": "css/style.css"
+                }
+            ]
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "viewType": "XML",
+                "async": true,
+                "viewPath": "autocleaning.cashapplication.view",
+                "controlAggregation": "pages",
+                "controlId": "app",
+                "clearControlAggregation": false
+            },
+            "routes": [
+                {
+                    "name": "Routeopen_invoice",
+                    "pattern": "open_invoice",
+                    "target": [
+                        "Targetopen_invoice"
+                    ]
+                },
+                {
+                    "name": "RouteBank",
+                    "pattern": "bank_details",
+                    "target": [
+                        "TargetBank"
+                    ]
+                },
+                {
+                    "name": "Routematching",
+                    "pattern": "matching",
+                    "target": [
+                        "Targetmatching"
+                    ]
+                },
+                {
+                    "name": "Routeclearedlogs",
+                    "pattern": "cleardlogs",
+                    "target": [
+                        "Targetclearedlogs"
+                    ]
+                },
+                {
+                    "name": "Routehome",
+                    "pattern": "home",
+                    "target": [
+                        "Targethome"
+                    ]
+                }
+            ],
+            "targets": {
+                "Targetopen_invoice": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "open_invoice",
+                    "viewName": "open_invoice"
+                },
+                "TargetBank": {
+                    "viewId": "bank_details",
+                    "viewName": "bank_details"
+                },
+                "Targetmatching":{
+                    "viewId": "match",
+                    "viewName": "match"
+                },
+                "Targetclearedlogs":{
+                    "viewId": "cleared_logs",
+                    "viewName": "cleared_logs"
+                },
+                "Targethome":{
+                    "viewId": "home",
+                    "viewName": "home"
+                }
+            }
+        },
+        "rootView": {
+            "viewName": "autocleaning.cashapplication.view.App",
+            "type": "XML",
+            "async": true,
+            "id": "App"
+        }
+    },
+    "sap.cloud": {
+        "public": true,
+        "service": "autocleaningcashapplication"
+    }
+}

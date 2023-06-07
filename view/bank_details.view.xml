@@ -1,0 +1,183 @@
+<mvc:View controllerName="autocleaning.cashapplication.controller.bank_details"
+    xmlns:sap.ui.fl="sap.ui.fl"
+    xmlns:smartfilterbar="sap.ui.comp.smartfilterbar"
+    xmlns:smartTable="sap.ui.comp.smarttable" height="100%"
+    xmlns:l="sap.ui.layout"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns:layout="sap.ui.layout"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:vm="sap.ui.comp.variants">
+    <f:DynamicPage id="dynamicPageId" headerExpanded="{/headerExpanded}">
+        <!-- DynamicPage Title -->
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <vm:VariantManagement standardItemText=" Bank Statements" />
+                </f:heading>
+                <f:actions />
+            </f:DynamicPageTitle>
+        </f:title>
+        <!-- DynamicPage Header -->
+
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <f:content>
+                    <fb:FilterBar id="filterbar" reset="onReset" search=".onSearch" useToolbar="true" showGoOnFB="true">
+                        <fb:filterItems>
+                            <fb:FilterItem name="E" label="Company Code">
+                                <fb:control>
+                                    <ComboBox id="companycodeget" items="{ path: 'oModelcompanyCode>/' }">
+                                        <core:Item text="{oModelcompanyCode>Bukrs}" key="{oModelcompanyCode>Bukrs}" />
+                                    </ComboBox>
+                                </fb:control>
+
+                            </fb:FilterItem>
+
+                            <fb:FilterItem name="Ee" label="Document Number">
+                                <fb:control>
+                                    <ComboBox id="docnum">
+                                        <core:Item text="" />
+                                    </ComboBox>
+
+                                </fb:control>
+                            </fb:FilterItem>
+
+                            <fb:FilterItem name="Cc" label="Posting Date">
+                                <fb:control>
+                                    <DateRangeSelection displayFormat="dd-MM-yyyy" dateValueFormat="yyyy-MM-dd" placeholder="Select a date range" />
+
+                                </fb:control>
+                            </fb:FilterItem>
+
+                        </fb:filterItems>
+                    </fb:FilterBar>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+
+        <f:content>
+            <ScrollContainer id="ScrollContainer" height='55rem' width="100%" vertical='true' horizontal="true">
+                <Table id="persoTable" sticky="ColumnHeaders,HeaderToolbar"  items="{ path: 'oModelBankGet>/' }" width="100%">
+                    <headerToolbar>
+                        <Toolbar>
+                            <content>
+                                <Title text="Bank Statements" level="H2" />
+                                <ToolbarSpacer />
+                                <Title id="idset" level="H2"></Title>
+                                <ToolbarSpacer />
+                                <Button icon="sap-icon://action-settings" />
+                            </content>
+                        </Toolbar>
+                    </headerToolbar>
+
+                    <columns>
+                        <Column hAlign="Left">
+                            <header >
+                                <Text text="Status" design="Bold" />
+                            </header>
+                        </Column>
+                        <Column hAlign="Left">
+                            <header>
+                                <Text text="Comp Code" />
+                            </header>
+                        </Column>
+                        <Column hAlign="Center">
+                            <header>
+                                <Text text=" Doc No" />
+                            </header>
+                        </Column>
+                        <Column hAlign="Center">
+                            <header>
+                                <Text text="Posting Date " />
+                            </header>
+                        </Column>
+                        <Column hAlign="Center" width="5%">
+                            <header>
+                                <Text text="Profit Center" />
+                            </header>
+                        </Column>
+                        <Column hAlign="Center" width="5%">
+                            <header>
+                                <Text text="Item Text" />
+                            </header>
+                        </Column>
+                        <Column hAlign="Center">
+                            <header>
+                                <Text text="Assignment Number" />
+                            </header>
+                        </Column>
+                        <Column hAlign="Center">
+                            <header>
+                                <Text text="BP Ref Key " />
+                            </header>
+                        </Column>
+                        <Column hAlign="Right">
+                            <header>
+                                <Text text=" Account " />
+                            </header>
+                        </Column>
+                        <Column hAlign="Right" width="4%">
+                            <header>
+                                <Text text=" Curr" />
+                            </header>
+                        </Column>
+                        <Column hAlign="Left">
+                            <header>
+                                <Text text="Short Key" />
+                            </header>
+                        </Column>
+                        <Column hAlign="Center">
+                            <header>
+                                <Text text="Memo Record Number" />
+                            </header>
+                        </Column>
+                        <Column hAlign="Center" width="20%">
+                            <header>
+                                <Text text="Payment Notes" />
+                            </header>
+                        </Column>
+
+                    </columns>
+
+                    <items>
+                        <ColumnListItem>
+                            <cells>
+                                  <core:Icon src="{oModelBankGet>EperlImg}" size="1rem" color="{oModelBankGet>EperlColor}"   />
+
+                                <!-- <Image src="{oModelBankGet>EperlImg}" width="30%" height="5%" /> -->
+                                <!-- <Text class="{{oModelBankGet>Eperl}}" /> -->
+
+                                <Text text="{oModelBankGet>Svbuk}" />
+                                <Text text="{oModelBankGet>B1doc}" />
+                                <Text text="{oModelBankGet>BvdatFormat}" />
+                                <Text text="{oModelBankGet>Prctr}" />
+                                <Text text="{oModelBankGet>Sgtxt}" />
+                                <Text text="{oModelBankGet>Zuonr}" />
+                                <Text text="{oModelBankGet>Xref1}" />
+                                <Text text="{oModelBankGet>Kwbtr}" />
+                                <Text text="{oModelBankGet>Kwaer}" />
+                                <Text text="{oModelBankGet>Kukey}" />
+                                <Text text="{oModelBankGet>Esnum}" />
+                                <Text text="{oModelBankGet>Vwezw}" />
+
+                            </cells>
+                        </ColumnListItem>
+
+
+                    </items>
+                </Table>
+            </ScrollContainer>
+        </f:content>
+        <!-- DynamicPage Footer -->
+        <f:footer>
+            <OverflowToolbar>
+                <ToolbarSpacer />
+                <Button type="Accept" text="Accept" />
+                <Button type="Reject" text="Reject" />
+            </OverflowToolbar>
+        </f:footer>
+    </f:DynamicPage>
+</mvc:View>
