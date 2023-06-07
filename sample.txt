@@ -1,7 +1,2 @@
+
 this is sample text....
-
-
-this edit from remote repositry.
-
-
-this edit from local.
